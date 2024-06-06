@@ -1,0 +1,163 @@
+{% extends "index.html" %} {% load static %} {% block content %}
+<section class="hero-section ptb-100 gradient-overlay"
+style="background: url('assets/img/header-bg-5.html')no-repeat center center / cover">
+<div class="container">
+<div class="row justify-content-center">
+   <div class="col-md-8 col-lg-7">
+       <div class="page-header-content text-white text-center pt-sm-5 pt-md-5 pt-lg-0">
+           <h2 class="text-white mb-0">{{career.position}}</h2>
+           <div class="custom-breadcrumb">
+               <ol class="breadcrumb d-inline-block bg-transparent list-inline py-0">
+                   <li class="list-inline-item breadcrumb-item"><a href="{% url "home_page" %}">Home</a></li>
+                   <li class="list-inline-item breadcrumb-item"><a href="{% url "career_list" %}" >Careers</a></li>
+                   <li class="list-inline-item breadcrumb-item active">{{career.position}}</li>
+               </ol>
+           </div>
+       </div>
+   </div>
+</div>
+</div>
+</section>
+<!--header section end-->
+
+<!--blog section start-->
+<div class="module ptb-100">
+<div class="container">
+<div class="row">
+   
+   <div class="col-lg-8 col-md-8">
+  
+       <!-- Post-->
+       <article class="post">
+           <div class="post-wrapper">
+               <div class="post-header">
+                   <h1 class="post-title">{{career.position}}</h1>
+                   <ul class="post-meta">
+                       <li>Location : <a href="#">{{career.location}}</a></li>
+                   </ul>
+               </div>
+              
+               <div class="post-content">
+                   <h5 class="post-title">Job Description</h1>
+                    {{career.description|linebreaks}}
+                   <hr>
+                   <h5 class="post-title">Job Requirement</h1>
+                    {{career.requirements|linebreaks}}
+                   {% comment %} <li>BS/MS degree in Computer Science, Engineering or a related subject</li><li>Proven software development experience and Android skills development</li><li>Proven working experience in Android app development and</li><li>Have published at least one original Android app</li><li>Experience with Android SDK</li><li>Experience working with remote data via REST and JSON</li><li>Experience with third-party libraries and APIs</li><li>Working knowledge of the general mobile landscape, architectures, trends, and emerging technologies</li><li>Solid understanding of the full mobile development life cycle</li> {% endcomment %}
+               </div>
+              
+           </div>
+       </article>
+       <section>
+        <div id="contact_us_form"></div>
+        <form method="post" class="apply-job-form" onsubmit="applyJobForm(event)">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="col">
+                  <input type="text" class="form-control" name="first_name" placeholder="First name" required>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="last_name" placeholder="Last name" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="col">
+                  <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="col">
+                  <textarea  class="form-control" name="cover_letter" placeholder="Cover Letter" rows="4" cols="50"></textarea>
+                </div>
+            </div>  
+            <br/>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Upload your Resume Here</label>
+                <input type="file" name="resume" class="form-control-file" accept=".pdf"  required>
+              </div>
+              <br/>
+              <button  type="submit" style="" class="btn solid-white-btn check-btn">Submit</button>
+          </form>
+       <!-- Post end-->
+       </section>
+   </div>
+   
+   <div class="col-lg-4 col-md-4">
+       <div class="sidebar-right pl-4">
+
+           {% comment %} <aside class="widget widget-categories">
+               <a href="https://rekruiters.online/job/android-developer-lucknow-jIwfsxY7/apply" target="_blank"><button type="submit" class="btn secondary-solid-btn btn-block btn-not-rounded mt-3">Apply Now</button></a>
+           </aside>  {% endcomment %}
+           <aside class="widget widget-categories">
+               <div class="widget-title">
+                   <h6>Salary</h6>
+                   <p>₹ {{career.salary}}</p>
+               </div>
+               <hr>
+               <div class="widget-title">
+                   <h6>Job Location</h6>
+                   <p>{{career.location}}</p>
+               </div>
+               <hr>
+               {% comment %} <div class="widget-title">
+                   <h6>Job Type</h6>
+                   <p>{{}}</p>
+               </div> {% endcomment %}
+           </aside>
+       </div>
+   </div>
+</div>
+</div>
+</div>
+<script>
+    function applyJobForm(event) {
+        event.preventDefault();
+        var formData = new FormData($('.apply-job-form')[0]);
+        var path = window.location.pathname;
+        console.log(path)
+        var path_id = path.split("/")
+        console.log(path_id)
+        var id=parseInt(path_id[path_id.length - 2]);
+        console.log("id",id)
+        formData.append("career_id",id);
+        
+        $.ajax({
+            type: 'POST',
+            url: {% url "apply_job" %},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $('.contact-error-message').remove();
+                if (response.status === 201) {
+                    $('#contact_us_form').html(`
+                    <div class="alert alert-success" role="alert">
+                        ${response.message}
+                    </div>
+                    `);
+                    
+                    // Reset the form
+                    document.querySelector('.apply-job-form').reset();
+                    
+                    setTimeout(function () {
+                        $('#contact_us_form').fadeOut('slow');
+                    }, 4000);
+                } else if (response.status === 400 && response.errors) {
+                    $.each(response.errors, function (field, error) {
+                        var inputField = $('[name="' + field + '"]');
+                        inputField.after('<div class="contact-error-message text-danger">' + error + '</div>');
+                    });
+                } else {
+                    console.error("Something Went Wrong");
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+{% endblock content %}
