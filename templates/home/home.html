@@ -1,0 +1,573 @@
+{% extends "index.html" %} {% load static %} {% block content %}
+<header class="header-v2">
+  <nav class="nav-v2">
+    <a class="a-v2" href=""></a>   
+    <a class="a-v2" href=""></a>
+    <a class="a-v2" href=""></a>
+  </nav>
+</header>
+{% if carousels %}
+<section class="promo-section">
+  <div class="carousel-v2">
+    <div class="list-v2">
+      {% for carousel in carousels %}
+      <div class="item-v2" id="carousel-item-{{ forloop.counter }}">
+        <img class="img-v2" src="{{carousel.image.url}}" width="100%"  />
+        <div class="content-v2">
+          <div class="author-v2">
+          </div>
+          {% with carousel.split_title as title_parts %}
+            <div class="title-v2">{{ title_parts.0 }}</div>
+            <div class="topic-v2">{{ title_parts.1 }}</div>
+        {% endwith %}
+          <div class="des-v2">
+            {{carousel.description}}
+          </div>
+          {% if carousel.service_id %}
+          <a href="{% url "service_detail" carousel.service_id %}">
+            <div class="buttons-v2">
+              <button style="border-color:#aaff00;color:#aaff00;">SEE MORE</button>
+            </div>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="thumbnail-v2">
+      {% comment %} {% for carousel in carousels %}
+      <div class="item-v2">
+        <img src="{{carousel.image.url}}" alt="carousel-{{carousel.title}}"/>
+        <div class="content-v2">
+          <div class="title-v2">
+            {{carousel.title}}
+          </div>
+          <div class="des-v2">
+            {{carousel.sub_title|truncatechars:30}}
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% endcomment %}
+    </div>
+    <div class="arrows-v2">
+      <button id="prev-v2"><</button>
+      <button id="next-v2">></button>
+    </div>
+    <div class="time"></div>
+  </div> 
+</section>
+{% endif %}
+
+{% comment %} {% if carousels %}
+<section class="hero-equal-height ptb-70">
+  <div id="heroCarousel" class="carousel slide carousel-laptop" data-ride="carousel">
+    <div class="carousel-inner">
+      {% for carousel in carousels %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ carousel.image.url }}" class="d-block w-100" alt="{{ image.alt }}">
+          <div class="carousel-caption d-none d-md-block mt-5">
+              <h4>{{ carousel.title }}</h4>
+              <h5>{{ carousel.sub_title }}</h5>
+              <button class="btn solid-white-btn check-btn">Get Started</button>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>  
+
+  </section>
+{% endif %} {% endcomment %}
+{% if features %}
+<section class="promo-section p-5">
+  <div class="container">
+    <div class="owl-carousel owl-theme promo-carousel">
+      {% for feature in features %}
+      <div class="item" style="margin-top:10px";>
+          <div
+            style="box-shadow: none;" class="single-promo-2 single-promo-hover rounded text-center white-bg p-5"
+          >
+            <div class="circle-icon">
+              <i class="{{feature.logo}} text-white"></i>
+            </div>
+            <h5>{{feature.title}}</h5>
+            <p>
+              {{feature.short_description}}
+            </p>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% if services %}
+<section class="services-section ptb-100 gray-light-bg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="section-heading text-center mb-5">
+            <strong class="color-secondary">Our Services</strong>
+            <h2>What Can We Do For You</h2>
+            {% comment %} <span class="animate-border mr-auto ml-auto mb-4"></span> {% endcomment %}
+            <p class="lead">
+              With a good blend of experience and domain knowledge, Inventics can
+              offer you amazing services for your existing or new business ideas.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        {% for service in services %}
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div
+              class="services-single text-center p-5 my-md-3 my-lg-3 my-sm-0 shadow-sm grey-bg rounded"
+            >
+              <i class="{{service.logo|safe}} services-hover icon-lg color-secondary d-block mb-4"></i>
+              <h5>{{service.title|default_if_none:""}}</h5>
+              <p class="mb-0">
+                {{service.description|truncatechars:70|default_if_none:""}}
+              </p>
+              <a
+                href="{% url "service_detail" service.id %}"
+                target="_blank"
+                class="detail-link mt-4"
+                >Read more <span class="ti-arrow-right"></span
+              ></a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<section class="about-with-promo ptb-100 white-bg">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="about-content-wrap">
+          <strong class="green-color"
+            >Inventics, Your Perfect Custom Software Development Partner</strong
+          >
+          <h2>Industry-Experienced Resources, On Demand</h2>
+          {% comment %} <span class="animate-border mb-4"></span> {% endcomment %}
+          <p>
+            Globally parallel task quality methodologies whereas inexpensive
+            sources. Uniquely administrate ubiquitous services through diverse
+            quality vectors syndicate error-free intellectual capital.
+          </p>
+
+          <ul class="check-list-info">
+            <li>
+              <strong>Advance Advisory Team</strong> – Our Business Advisory
+              team has advanced experience in providing strategic support to
+              assist clients with meeting the demands of an ever-changing
+              economic and business climate.
+            </li>
+            <li>
+              <strong>Professional Consulting Services</strong> – Our team works
+              alongside companies to drive proven results and meet our client’s
+              needs to ensure you focus on your core business goals.
+            </li>
+            <li>
+              <strong>Complete Code Control</strong> – We share code in day one,
+              which can be mornitors easily with each commit our developers
+              made. As we belive in providing best services to be with you
+              forever unlike other companies holding over code to prevent you
+              from seeking out other vendors.
+            </li>
+            <li>
+              <strong>24/7 Support Help Center</strong> – Instant support
+              includes email, support tickets, chat and phone.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="about-promo-wrap">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 promo-col">
+              <div class="promo-item">
+                <div class="promo-img">
+                  <img
+                    src="{% static 'img/increase.svg' %}"
+                    alt="services"
+                    width="60"
+                  />
+                </div>
+                <h5>Scalable Solution</h5>
+                <p>Highly scalable solutions for heavy traffic business.</p>
+              </div>
+              <div class="promo-item">
+                <div class="promo-img">
+                  <img
+                    src="{% static 'img/search-engine.svg' %}"
+                    alt="services"
+                    width="60"
+                  />
+                </div>
+                <h5>Standard Code</h5>
+                <p>Well documented, clean and readable code.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 promo-col">
+              <div class="promo-item">
+                <div class="promo-img">
+                  <img
+                    src="{% static 'img/credit-card.svg' %}"
+                    alt="services"
+                    width="60"
+                  />
+                </div>
+                <h5>Cost-effective</h5>
+                <p>We are expert, flexible and afordable.</p>
+              </div>
+              <div class="promo-item">
+                <div class="promo-img">
+                  <img
+                    src="{% static 'img/interface.svg' %}"
+                    alt="services"
+                    width="60"
+                  />
+                </div>
+                <h5>Certified Developers</h5>
+                <p>Developers are highly skilled and certified</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="call-to-action ptb-70" style="background: #000">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-9">
+        <div class="section-heading text-center text-white mb-5">
+          <h2 class="green-color">HIRE US FOR YOUR NEXT PLAN</h2>
+          <p class="lead">Start Project With EvoSynchTech</p>
+        </div>
+      </div>
+    </div>
+    <div id="hire_us_form"></div>
+    <form onsubmit="hireForm(event)" method="post"  id="hire-form">
+      {% csrf_token %}
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+          <div class="analysis-form-wrap text-center">
+            <div class="col-lg-4 col-md-12 p-0">
+              <div class="form-group analysis-form-group">
+                <span class="analysis-form-input">
+                  <input
+                    type="url"
+                    name="website"
+                    size="40"
+                    class="form-control"
+                    placeholder="Type website URL"
+                  />
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12 p-0">
+              <div class="form-group analysis-form-group analysis-form-border">
+                <span class="analysis-form-input">
+                  <input
+                    type="email"
+                    name="email"
+                    size="40"
+                    class="form-control"
+                    placeholder="Your Email"
+                  />
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12 p-0">
+              <div class="form-group ml-4">
+                <input
+                  type="submit"
+                  style="background-color: #aaff00"
+                  value="Check Now"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+{% if testimonials %}
+<section class="testimonial-section ptb-100" style="background: #f6f6f6">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="testimonial-heading text-white">
+            <h2 class="text-black">What Our Client Say About Us</h2>
+            {% comment %} <span class="animate-border mb-4"></span> {% endcomment %}
+            <p style="color: #000">
+              Our work speak for itself. We are 100% commited towards the best
+              quality product delivery.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class="testimonial-content-wrap">
+            <div
+              class="owl-carousel owl-theme client-testimonial-1 custom-dot testimonial-shape"
+            >
+            {% for testimonial in testimonials %}
+            <div class="item">
+                <div class="testimonial-quote-wrap">
+                  <div class="media author-info mb-3">
+                    <div class="author-img mr-3">
+                      <img
+                        src="{{testimonial.company_logo.url}}"
+                        alt="client {{testimonial.id}}"
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div class="media-body text-white">
+                      <h5 class="mb-0 text-white">{{testimonial.company_person}}</h5>
+                      <span>{{testimonial.company_name}}</span>
+                    </div>
+                    <span class="fas fa-quote-right icon-md text-white"></span>
+                  </div>
+                  <div class="client-say text-white">
+                    {{testimonial.description}}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% if blogs %}
+<section class="our-blog-section ptb-100">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-9">
+          <div class="section-heading text-center mb-5">
+            {% comment %} <strong class="color-secondary">New and Blog</strong> {% endcomment %}
+            <h2>Our Latest Blogs</h2>
+            <span class="animate-border mr-auto ml-auto mb-4"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        {% for blog in blogs %}
+        <div class="col-md-4">
+            <div class="single-blog-card card border-0 shadow-sm">
+              <div class="blog-img position-relative">
+                <img
+                  src="{{blog.sample_image.url}}"
+                  class="card-img-top"
+                  alt="blog {{blog.id}}"
+                />
+
+                <div class="meta-date">
+                  <small>{{blog.created_at|date:"F j"}}</small>
+                </div>
+              </div>
+              <div class="card-body">
+                <h3 class="h5 mb-2 card-title">
+                  <a href="{% url "blog_detail" blog.id %}"
+                    >{{blog.title|default_if_none:""}}</a
+                  >
+                </h3>
+                <p class="card-text">
+                  {{blog.description|truncatechars:100|default_if_none:""}}
+                </p>
+                <a
+                  href="{% url "blog_detail" blog.id %}"
+                  class="detail-link"
+                  >Read more <span class="ti-arrow-right"></span
+                ></a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if clients %}
+<div
+  class="client-section ptb-100"
+  style="
+    background: url('assets/img/client-bg.jpg') no-repeat center center / cover;
+  "
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <div class="client-heading-wrap">
+          <h3>Who are Happy With Services and Work</h3>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6">
+        <div class="client-para">
+          <p>
+            We are trusted by small to mid-sized organizations to advance their
+            technology objectives through custom software solutions including
+            mobile & web application development, digital marketing,
+            infrastructure support, Software Security and Quality Assurance (QA
+            Testing) etc.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--clients logo start-->
+    <div class="row align-items-center justify-content-center mb-4">
+      <div class="col-md-10 col-lg-9">
+        <div
+          class="owl-carousel owl-theme clients-carousel dot-indicator client-logo-wrap"
+        >
+        {% for client in clients %}
+        <div class="item single-client">
+            <img
+              src="{{client.logo.url}}"
+              alt="{{client.company_name}} Logo"
+              class="client-img"
+            />
+            <p>{{client.company_name}}</p>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!--clients logo end-->
+  </div>
+</div>
+<!--client section end-->
+{% endif %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const nextDom = document.getElementById('next-v2');
+    const prevDom = document.getElementById('prev-v2');
+    const carouselDom = document.querySelector('.carousel-v2');
+    const SliderDom = carouselDom.querySelector('.list-v2');
+    const thumbnailBorderDom = document.querySelector('.thumbnail-v2');
+    const timeRunning = 3000;
+    const timeAutoNext = 7000;
+  
+    let runTimeOut;
+    let runNextAuto = setTimeout(() => {
+      nextDom.click();
+    }, timeAutoNext);
+  
+    nextDom.onclick = function() {
+      showSlider('next');
+    }
+  
+    prevDom.onclick = function() {
+      showSlider('prev');
+    }
+  
+    function showSlider(type) {
+      const SliderItemsDom = SliderDom.querySelectorAll('.item-v2');
+      const thumbnailItemsDom = thumbnailBorderDom.querySelectorAll('.item-v2');
+  
+      if (type === 'next') {
+        SliderDom.appendChild(SliderItemsDom[0]);
+        thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+        carouselDom.classList.add('next');
+      } else {
+        SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
+        thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+        carouselDom.classList.add('prev');
+      }
+  
+      clearTimeout(runTimeOut);
+      runTimeOut = setTimeout(() => {
+        carouselDom.classList.remove('next');
+        carouselDom.classList.remove('prev');
+      }, timeRunning);
+  
+      clearTimeout(runNextAuto);
+      runNextAuto = setTimeout(() => {
+        nextDom.click();
+      }, timeAutoNext);
+    }
+  
+    // Add click event listeners to thumbnails
+    const thumbnails = thumbnailBorderDom.querySelectorAll('.item-v2');
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+  
+    function goToSlide(index) {
+      const SliderItemsDom = Array.from(SliderDom.querySelectorAll('.item-v2'));
+      const thumbnailItemsDom = Array.from(thumbnailBorderDom.querySelectorAll('.item-v2'));
+  
+      // Find the current index of the first slide
+      const currentIndex = SliderItemsDom.indexOf(SliderDom.firstElementChild);
+  
+      // Calculate how many slides to move
+      const slidesToMove = (index - currentIndex + SliderItemsDom.length) % SliderItemsDom.length;
+  
+      // Move the slides and thumbnails
+      for (let i = 0; i < slidesToMove; i++) {
+        SliderDom.appendChild(SliderItemsDom[0]);
+        thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+      }
+  
+      carouselDom.classList.add('next');
+  
+      clearTimeout(runTimeOut);
+      runTimeOut = setTimeout(() => {
+        carouselDom.classList.remove('next');
+      }, timeRunning);
+  
+      clearTimeout(runNextAuto);
+      runNextAuto = setTimeout(() => {
+        nextDom.click();
+      }, timeAutoNext);
+    }
+  });
+function hireForm(event) {
+        event.preventDefault();
+        var formData = $('#hire-form').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/enquiry/',
+            data: formData,
+            success: function (response) {
+                $('.contact-error-message').remove();
+                if (response.status === 201) {
+                    $('#hire_us_form').html(`
+                    <div class="alert alert-success" role="alert">
+                        ${response.message}
+                    </div>
+                `);
+
+                    // Reset the form
+                    document.querySelector('#hire-form').reset();
+
+                    setTimeout(function () {
+                        $('#hire_us_form').fadeOut('slow');
+                    }, 4000);
+                } else if (response.status === 400 && response.errors) {
+                    $.each(response.errors, function (field, error) {
+                        var inputField = $('[name="' + field + '"]');
+                        inputField.after('<div class="contact-error-message text-white">' + error + '</div>');
+                    });
+                } else {
+                    console.error("Something Went Wrong");
+                }
+              },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+{% endblock content %} {% include "includes/footer.html" %}
