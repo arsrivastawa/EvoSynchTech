@@ -3548,9 +3548,6 @@ a.video-play-icon-without-bip:hover{
     top: -70px;
 }
 @media (min-width: 320px) and (max-width: 767px){
-    .client-heading-wrap, .client-para{
-        display: none;
-    }
     .client-logo-wrap{
         background: transparent;
         top: 0;
@@ -3577,8 +3574,9 @@ a.video-play-icon-without-bip:hover{
 }
 
 .single-client img {
-    max-width: 100%;
-    max-height: 100%;
+    /* max-width: 100%; */
+    height: 80px;
+    object-fit: contain;
     -webkit-filter: opacity(50%);
     filter: opacity(90%);
     width: 100%;
@@ -5144,7 +5142,7 @@ button.scroll-top:focus{
     margin-right: 40px;
 }
 .carousel-v2{
-    width: 99vw;
+    width: 100%;
     height: 100vh;
     margin-top: -50px;
     position: relative;
@@ -5180,6 +5178,18 @@ font-weight: bold;
 font-size: 4em;
 list-style: 1.3em;
 }
+
+@media (min-width: 500px) and (max-width: 700px) {
+    .topic-v2, .title-v2{
+        font-size: 3em !important;
+    }
+}
+@media screen and (max-width: 500px) {
+    .topic-v2, .title-v2{
+        font-size: 2em !important;
+    }
+}
+
 .carousel-v2 .list-v2 .item-v2 .content-v2 .topic-v2{
     color: #f1683a;
 }

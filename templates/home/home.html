@@ -50,8 +50,8 @@
       {% endfor %} {% endcomment %}
     </div>
     <div class="arrows-v2">
-      <button id="prev-v2"><</button>
-      <button id="next-v2">></button>
+      <button id="prev-v2">&lt;</button>
+      <button id="next-v2">&gt;</button>
     </div>
     <div class="time"></div>
   </div> 
@@ -477,11 +477,11 @@
   
       if (type === 'next') {
         SliderDom.appendChild(SliderItemsDom[0]);
-        thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+        {% comment %} thumbnailBorderDom.appendChild(thumbnailItemsDom[0]); {% endcomment %}
         carouselDom.classList.add('next');
       } else {
         SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
-        thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+        {% comment %} thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]); {% endcomment %}
         carouselDom.classList.add('prev');
       }
   
