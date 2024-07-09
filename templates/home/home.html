@@ -321,16 +321,16 @@
             <div class="item">
                 <div class="testimonial-quote-wrap">
                   <div class="media author-info mb-3">
-                    <div class="author-img mr-3">
+                    {% comment %} <div class="author-img mr-3">
                       <img
                         src="{{testimonial.company_logo.url}}"
                         alt="client {{testimonial.id}}"
                         class="img-fluid"
                       />
-                    </div>
+                    </div> {% endcomment %}
                     <div class="media-body text-white">
                       <h5 class="mb-0 text-white">{{testimonial.company_person}}</h5>
-                      <span>{{testimonial.company_name}}</span>
+                      {% comment %} <span>{{testimonial.company_name}}</span> {% endcomment %}
                     </div>
                     <span class="fas fa-quote-right icon-md text-white"></span>
                   </div>
