@@ -1822,6 +1822,8 @@ nav.scrolled{
 
 .services-single {
     transition: all 0.3s ease-in;
+    background: linear-gradient(75deg, #1b1b18 10%, #5f5f5d);
+    color: #ffffff;
     position: relative;
 }
 .services-single:after{
@@ -1834,21 +1836,25 @@ nav.scrolled{
     opacity: 0.8;
 }
 
-.services-single:hover h5, .services-single:hover span, .services-single:hover a {
+.services-single h5, .services-single span, .services-single a {
     color: #ffffff !important;
+    opacity: 1;
+}
+.services-single:hover h5, .services-single:hover span, .services-single:hover a {
+    color: #000000 !important;
     opacity: 1;
 }
 
 .services-single:hover {
     transition: all 0.3s ease-in;
-    background: linear-gradient(75deg, #1b1b18 10%, #5f5f5d) ;
-    color: #fff;
+    background: linear-gradient(75deg, #eff2f7 10%, #eff2f7) ;
+    color: #000;
 }
 .services-single:hover .services-single:after{
     z-index: 999;
 }
 /*=========================================
-            11. PORTFOLIO CSS
+11. PORTFOLIO CSS
 ============================================*/
 
 .filter-btn {
@@ -3396,9 +3402,13 @@ a.video-play-icon-without-bip:hover{
     margin-right: 10px;
 }
 .author-info .media-body{
+    color: #AAFF00;
     position: relative;
-    left: 120px;
 }
+.author-info .media-body h5{
+    color: #AAFF00;
+}
+
 .author-img {
     border: 4px solid #8812cc;
     width: 100px;
@@ -3544,12 +3554,19 @@ a.video-play-icon-without-bip:hover{
 
 .client-logo-wrap{
     background: #ffffff;
-    padding: 30px;
+    padding: 25px;
     border-radius: 4px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12);
     position: absolute;
     top: -70px;
 }
+
+@media screen and (min-width: 768px) {
+    .client-logo-wrap {
+        border: 4px solid #AAFF00;
+    }
+}
+
 @media (min-width: 320px) and (max-width: 767px){
     .client-logo-wrap{
         background: transparent;
@@ -4233,14 +4250,24 @@ a.pricing-value {
 .single-promo-hover {
     transition: all .2s ease-out;
     will-change: transform;
-    background-color: #e8e8e8;
-}
-.single-promo-hover:hover{
-    box-shadow: 0 1rem 3rem rgba(31,45,61,.125)!important;
     background: linear-gradient(75deg, #1b1b18 10%, #5f5f5d) !important;
     color: #ffffff !important;
 }
+.single-promo-hover:hover{
+    box-shadow: 0 1rem 3rem rgba(31,45,61,.125)!important;
+    background: linear-gradient(75deg, #eff2f7 10%, #eff2f7) !important;
+    color: #000000 !important;
+}
 .single-promo-hover:hover h5{
+    color: #000000 !important;
+}
+.single-promo-hover:hover .circle-icon{
+    color: #000000 !important;
+}
+.single-promo-hover .circle-icon{
+    color: #AAFF00 !important;
+}
+.single-promo-hover h5{
     color: #ffffff !important;
 }
 .custom-shadow{
@@ -4248,6 +4275,7 @@ a.pricing-value {
 }
 .circle-icon {
     display: block;
+    font-size: 30px;
 }
 .single-promo-2 {
     box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.12);
@@ -4287,7 +4315,7 @@ a.pricing-value {
            26. FOOTER CSS
 ============================================*/
 .footer-top {
-    padding: 65px 0;
+    padding: 70px 0;
     background: linear-gradient(75deg, #1b1b18 10%, #5f5f5d) !important;
 }
 
@@ -5116,8 +5144,11 @@ button.scroll-top:focus{
         margin-top: -70px;
     }
 }
-.services-single:hover .services-hover{
+.services-single .services-hover{
     color: #AAFF00;
+}
+.services-single:hover .services-hover{
+    color: #000000;
 }
 .grey-bg{
     background-color: #e8e8e8;
@@ -5191,6 +5222,8 @@ button.scroll-top:focus{
     text-shadow: 0 5px 10px #0004;
 }
 
+
+
 @media (min-width: 800px) and (max-width: 992px) {
     .carousel-v2 .list-v2 .item-v2 .content-v2 .title-v2,
     .carousel-v2 .list-v2 .item-v2 .content-v2 .topic-v2{
@@ -5246,14 +5279,6 @@ button.scroll-top:focus{
     .carousel-v2 .list-v2 .item-v2 .content-v2 .des-v2{
         font-size: 12px !important;
     }
-    .arrows-v2{
-        position: absolute;
-        top: 85% !important;
-        right: 52%;
-        width: 300px;
-        max-width: 30%;
-        gap: 10px;
-    }
     .arrows-v2 button{
         width: 35px !important;
         height: 35px !important;
@@ -5308,14 +5333,6 @@ button.scroll-top:focus{
     .carousel-v2 .list-v2 .item-v2 .content-v2 .des-v2{
         font-size: 10px !important;
     }
-    .arrows-v2{
-        position: absolute;
-        top: 85% !important;
-        right: 35% !important;
-        width: 300px;
-        max-width: 30%;
-        gap: 10px;
-    }
     .arrows-v2 button{
         width: 30px !important;
         height: 30px !important;
@@ -5342,14 +5359,6 @@ button.scroll-top:focus{
     }
     .carousel-v2 .list-v2 .item-v2 .content-v2 .des-v2{
         font-size: 8px !important;
-    }
-    .arrows-v2{
-        position: absolute;
-        top: 85% !important;
-        right: 35% !important;
-        width: 300px;
-        max-width: 30%;
-        gap: 10px;
     }
     .arrows-v2 button{
         width: 25px !important;
@@ -5438,13 +5447,17 @@ list-style: 1.3em;
 .thumbnail-v2 .item-v2 .content-v2 .description-v2{
     font-weight: 300;
 }
+
 .arrows-v2{
     position: absolute;
     top: 80%;
-    right: 52%;
+    z-index: 10;
+    right: 50% !important;
+    translate: 50% 50% !important;
     width: 300px;
     max-width: 30%;
     display: flex;
+    justify-content: center;
     gap: 10px;
     align-items: center;
 }
